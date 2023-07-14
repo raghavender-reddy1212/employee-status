@@ -27,7 +27,6 @@ public class EmployeeService {
 	public Employee createEmployee(Employee employee) {
 		
 		addressRepository.saveAll(employee.getAddress());
-		
 		return employeeRepository.save(employee);
 	}
 
