@@ -1,5 +1,8 @@
 package com.empstatus.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 
 
@@ -15,9 +18,9 @@ public class Employee {
 	int age;
 	public String visaStatus;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "address_id", referencedColumnName = "Id")
-	private Address address;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "employee_id")
+	private List<Address> addressList = new ArrayList<>();
 	
 	public Employee() {
 		
@@ -30,7 +33,6 @@ public class Employee {
 		this.lastName = lastName;
 		this.age = age;
 		this.visaStatus = visaStatus;
-		this.address = address;
 	}
 
 	public String getFirstName() {
@@ -64,18 +66,22 @@ public class Employee {
 		this.visaStatus = visaStatus;
 	}
 	
-	public Address getAddress() {
-		return address;
+	public List<Address> getAddressList() {
+		return addressList;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setAddressList(List<Address> addressList) {
+		this.addressList = addressList;
+	}
+
+	public void addAddresses(Address addr) {
+		addressList.add(addr);
 	}
 
 	@Override
 	public String toString() {
 		return "Employee [firstName=" + firstName + ", Id=" + Id + ", lastName=" + lastName + ", age=" + age
-				+ ", visaStatus=" + visaStatus + ", address=" + address + "]";
+				+ ", visaStatus=" + visaStatus + "]";
 	}
 
 

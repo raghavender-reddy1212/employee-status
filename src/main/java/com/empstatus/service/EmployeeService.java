@@ -60,7 +60,7 @@ public class EmployeeService {
 	
 	public Employee assignProfile(int id, Address address) {
 		Employee employee = employeeRepository.findById(id).get();
-		employee.setAddress(address);
+		employee.addAddresses(address);
 		return employeeRepository.save(employee);
 	}
 
