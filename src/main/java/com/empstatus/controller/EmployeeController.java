@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -23,33 +25,35 @@ public class EmployeeController {
 	public EmployeeService employeeService;
 	
 	@PostMapping("/employees")
-	public Employee createEmployee(@RequestBody Employee employee) {
-		return employeeService.createEmployee(employee);
+	ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
+		return new ResponseEntity<Employee>( employeeService.createEmployee(employee), HttpStatus.BAD_REQUEST);
 	}
 	
 	@GetMapping("/employees")
-	public List<Employee> getEmployees() {
-		return employeeService.findEmployees();
+	ResponseEntity<List<Employee>> getEmployees() {
+		return new ResponseEntity<List<Employee>>(employeeService.findEmployees(), HttpStatus.ACCEPTED);
 	}
 	
 	@GetMapping("/employees/{id}")
-	public Employee getEmployee(@PathVariable int id) {
-		return employeeService.findEmployee(id);
+	ResponseEntity<Employee> getEmployee(@PathVariable int id) {
+		return new ResponseEntity<Employee>( employeeService.findEmployee(id),HttpStatus.OK);
 	}
 	
 	@PutMapping("/employees/{id}")
-	public Employee updateEmployee(@PathVariable int id, @RequestBody Employee employee) {
-		return employeeService.updateEmployee(id, employee);
+	ResponseEntity<Employee> updateEmployee(@PathVariable int id, @RequestBody Employee employee) {
+		return new ResponseEntity<Employee>(employeeService.updateEmployee(id, employee), HttpStatus.FOUND);
 	}
 	
 	@DeleteMapping("/employees/{id}")
-	public void deleteEmployee(@PathVariable int id) {
+	ResponseEntity<Void> deleteEmployee(@PathVariable int id) {
 		employeeService.deleteEmployee(id);
+		return new ResponseEntity<Void>(HttpStatus.BANDWIDTH_LIMIT_EXCEEDED);
+		
 	}
 	
 	@PatchMapping("/employees/{id}")
-	public Employee updateEmployeeData(@PathVariable int id, @RequestBody Map<String, Object> employee) {
-		return employeeService.patch(id, employee);
+	ResponseEntity<Employee> updateEmployeeData(@PathVariable int id, @RequestBody Map<String, Object> employee) {
+		return new ResponseEntity<Employee>(employeeService.patch(id, employee), HttpStatus.OK);
 	}
 	
 
