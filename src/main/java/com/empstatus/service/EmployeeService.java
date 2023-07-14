@@ -58,9 +58,15 @@ public class EmployeeService {
 		return employeeRepository.save(employee.get());
 	}
 	
-	public Employee assignProfile(Long id, Address address) {
+	public Employee addAddress(Long id, Address address) {
 		Employee employee = employeeRepository.findById(id).get();
 		employee.addAddresses(address);
+		return employeeRepository.save(employee);
+	}
+	
+	public Employee removeAddress(Long id, Address address) {
+		Employee employee = employeeRepository.findById(id).get();
+		employee.removeAddress(address);
 		return employeeRepository.save(employee);
 	}
 

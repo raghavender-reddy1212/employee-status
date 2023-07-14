@@ -23,7 +23,7 @@ public class Employee {
 	public String email;
 	public String phone;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "employee_id")
 	private List<Address> addressList = new ArrayList<>();
 	
@@ -115,6 +115,11 @@ public class Employee {
 
 	public void addAddresses(Address addr) {
 		addressList.add(addr);
+	}
+	
+	public void removeAddress(Address addr) {
+		if (addressList != null)
+			addressList.remove(addr);
 	}
 
 	@Override
