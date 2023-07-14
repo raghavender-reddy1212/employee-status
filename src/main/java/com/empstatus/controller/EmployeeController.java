@@ -45,7 +45,7 @@ public class EmployeeController {
 	}
 	
 	@PutMapping("/employees/{id}")
-	ResponseEntity<Employee> updateEmployee(@PathVariable int id, @RequestBody Employee employee) {
+	ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
 		return new ResponseEntity<Employee>(employeeService.updateEmployee(id, employee), HttpStatus.OK);
 	}
 	
@@ -56,12 +56,12 @@ public class EmployeeController {
 	}
 	
 	@PatchMapping("/employees/{id}")
-	ResponseEntity<Employee> updateEmployeeData(@PathVariable int id, @RequestBody Map<String, Object> employee) {
+	ResponseEntity<Employee> updateEmployeeData(@PathVariable Long id, @RequestBody Map<String, Object> employee) {
 		return new ResponseEntity<Employee>(employeeService.patch(id, employee), HttpStatus.OK);
 	}
 	
 	@PutMapping("/employees/{id}/address/{address_id}")
-	ResponseEntity<Employee> assignDetail(@PathVariable int id, @PathVariable int address_id) {
+	ResponseEntity<Employee> assignDetail(@PathVariable Long id, @PathVariable int address_id) {
     	Address address = addressService.findAddress(address_id); 
     	System.out.println(address);
     	return new ResponseEntity<Employee>(employeeService.assignProfile(id, address), HttpStatus.OK);
