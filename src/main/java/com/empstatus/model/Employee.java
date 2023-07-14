@@ -3,9 +3,15 @@ package com.empstatus.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -16,11 +22,20 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long Id;
+	@NotBlank(message = "Last Name Cannot be Empty")
 	public String lastName;
+	@NotBlank(message = "Age Cannot be Empty")
+	@Min(value = 18)
 	int age;
+	@NotBlank(message = "Visa Status Cannot be Empty")
 	public String visaStatus;
+	@NotBlank(message = "DOB Cannot be Empty")
 	public Date dob;
+	@NotBlank(message = "Email Cannot be Empty")
+	@Size(max =50)
 	public String email;
+	@NotBlank(message = "Phone Cannot be Empty")
+	@Size(max = 10)
 	public String phone;
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
