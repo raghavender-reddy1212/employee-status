@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>employye-status</artifactId>
+	<artifactId>employee-status</artifactId>
 	<version>0.0.1</version>
-	<name>employye-status</name>
-	<description>Create Sttaus Report on Weekly Basis</description>
+	<name>employee-status</name>
+	<description>Create Status Report on Weekly Basis</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -42,7 +42,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
-			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
