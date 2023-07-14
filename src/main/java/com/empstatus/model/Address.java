@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "Address")
@@ -13,11 +15,17 @@ public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int Id;
+	@NotBlank(message = "Line 1 of Address cannot be empty")
 	public String address1;
 	public String address2;
+	@NotBlank(message = "City cannot be empty")
 	public String city;
+	@NotBlank(message = "State cannot be empty")
 	public String state;
+	@NotBlank(message = "Country cannot be empty")
 	public String country;
+	@NotBlank(message = "Zipcode cannot be empty")
+	@Size(max = 6)
 	public int zipcode;
 
 	public int getId() {
