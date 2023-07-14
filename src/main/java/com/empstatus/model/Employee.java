@@ -1,11 +1,9 @@
 package com.empstatus.model;
 
-<<<<<<< HEAD
+
 import java.util.ArrayList;
 import java.util.List;
-=======
 import java.util.Date;
->>>>>>> fbb609263db6ce7f42f4de48e27a13f38b327d2d
 
 import jakarta.persistence.*;
 
@@ -25,7 +23,6 @@ public class Employee {
 	public String email;
 	public String phone;
 	
-<<<<<<< HEAD
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "employee_id")
 	private List<Address> addressList = new ArrayList<>();
@@ -34,7 +31,7 @@ public class Employee {
 		
 	}
 	
-	public Employee(String firstName, int id, String lastName, int age, String visaStatus, Address address) {
+	public Employee(String firstName, Long id, String lastName, int age, String visaStatus, Address address) {
 		super();
 		this.firstName = firstName;
 		Id = id;
@@ -42,11 +39,6 @@ public class Employee {
 		this.age = age;
 		this.visaStatus = visaStatus;
 	}
-=======
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "address_id", referencedColumnName = "Id")
-	private Address address;
->>>>>>> fbb609263db6ce7f42f4de48e27a13f38b327d2d
 
 	public String getFirstName() {
 		return firstName;
@@ -80,9 +72,6 @@ public class Employee {
 		return phone;
 	}
 
-	public Address getAddress() {
-		return address;
-	}
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -103,11 +92,10 @@ public class Employee {
 	public void setVisaStatus(String visaStatus) {
 		this.visaStatus = visaStatus;
 	}
-<<<<<<< HEAD
-	
+
 	public List<Address> getAddressList() {
 		return addressList;
-=======
+	}
 
 	public void setDob(Date dob) {
 		this.dob = dob;
@@ -119,7 +107,6 @@ public class Employee {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
->>>>>>> fbb609263db6ce7f42f4de48e27a13f38b327d2d
 	}
 
 	public void setAddressList(List<Address> addressList) {
@@ -129,19 +116,11 @@ public class Employee {
 	public void addAddresses(Address addr) {
 		addressList.add(addr);
 	}
-<<<<<<< HEAD
 
 	@Override
 	public String toString() {
 		return "Employee [firstName=" + firstName + ", Id=" + Id + ", lastName=" + lastName + ", age=" + age
 				+ ", visaStatus=" + visaStatus + "]";
 	}
-
-=======
-	
-	
-	
-	
->>>>>>> fbb609263db6ce7f42f4de48e27a13f38b327d2d
 
 }
