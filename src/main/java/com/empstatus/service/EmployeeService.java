@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.empstatus.model.Address;
 import com.empstatus.model.Employee;
+import com.empstatus.repository.AddressRepository;
 import com.empstatus.repository.EmployeeRepository;
 
 @Service
@@ -18,9 +19,14 @@ public class EmployeeService {
 
 	@Autowired
 	public EmployeeRepository employeeRepository;
+	
+	@Autowired
+	public AddressRepository addressRepository;
 
 	// Post Operation
 	public Employee createEmployee(Employee employee) {
+		
+		addressRepository.saveAll(employee.getAddress());
 		return employeeRepository.save(employee);
 	}
 
@@ -58,9 +64,15 @@ public class EmployeeService {
 		return employeeRepository.save(employee.get());
 	}
 	
-	public Employee assignProfile(Long id, Address address) {
+	public Employee addAddress(Long id, Address address) {
 		Employee employee = employeeRepository.findById(id).get();
 		employee.addAddresses(address);
+		return employeeRepository.save(employee);
+	}
+	
+	public Employee removeAddress(Long id, Address address) {
+		Employee employee = employeeRepository.findById(id).get();
+		employee.removeAddress(address);
 		return employeeRepository.save(employee);
 	}
 

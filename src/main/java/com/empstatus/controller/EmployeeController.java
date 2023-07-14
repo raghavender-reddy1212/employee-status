@@ -63,10 +63,16 @@ public class EmployeeController {
 	
 	
 	@PutMapping("/employees/{id}/address/{address_id}")
-	ResponseEntity<Employee> assignDetail(@PathVariable long id, @PathVariable int address_id) {
+	ResponseEntity<Employee> addAddress(@PathVariable long id, @PathVariable int address_id) {
     	Address address = addressService.findAddress(address_id); 
-    	System.out.println(address);
-    	return new ResponseEntity<Employee>(employeeService.assignProfile(id, address), HttpStatus.OK);
+    	return new ResponseEntity<Employee>(employeeService.addAddress(id, address), HttpStatus.OK);
     }
+	
+	@PutMapping("/employees/{id}/remove_address/{address_id}")
+	ResponseEntity<Employee> removeAddress(@PathVariable long id, @PathVariable int address_id) {
+    	Address address = addressService.findAddress(address_id); 
+    	return new ResponseEntity<Employee>(employeeService.removeAddress(id, address), HttpStatus.OK);
+    }
+
 
 }
