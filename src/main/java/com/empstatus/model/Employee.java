@@ -25,20 +25,7 @@ public class Employee {
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "employee_id")
-	private List<Address> addressList = new ArrayList<>();
-	
-	public Employee() {
-		
-	}
-	
-	public Employee(String firstName, Long id, String lastName, int age, String visaStatus, Address address) {
-		super();
-		this.firstName = firstName;
-		Id = id;
-		this.lastName = lastName;
-		this.age = age;
-		this.visaStatus = visaStatus;
-	}
+	private List<Address> address = new ArrayList<>();
 
 	public String getFirstName() {
 		return firstName;
@@ -93,9 +80,7 @@ public class Employee {
 		this.visaStatus = visaStatus;
 	}
 
-	public List<Address> getAddressList() {
-		return addressList;
-	}
+	
 
 	public void setDob(Date dob) {
 		this.dob = dob;
@@ -109,23 +94,22 @@ public class Employee {
 		this.phone = phone;
 	}
 
-	public void setAddressList(List<Address> addressList) {
-		this.addressList = addressList;
+	public List<Address> getAddress() {
+		return address;
+	}
+
+	public void setAddress(List<Address> address) {
+		this.address = address;
 	}
 
 	public void addAddresses(Address addr) {
-		addressList.add(addr);
+		address.add(addr);
 	}
 	
 	public void removeAddress(Address addr) {
-		if (addressList != null)
-			addressList.remove(addr);
+		if (address != null)
+			address.remove(addr);
 	}
 
-	@Override
-	public String toString() {
-		return "Employee [firstName=" + firstName + ", Id=" + Id + ", lastName=" + lastName + ", age=" + age
-				+ ", visaStatus=" + visaStatus + "]";
-	}
 
 }

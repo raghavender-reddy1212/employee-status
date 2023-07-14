@@ -19,22 +19,6 @@ public class Address {
 	public String state;
 	public String country;
 	public int zipcode;
-	
-	public Address() {
-		
-	}
-
-	public Address(int id, String address1, String address2, String city, String state, String country, int zipcode,
-			Employee employee) {
-		super();
-		Id = id;
-		this.address1 = address1;
-		this.address2 = address2;
-		this.city = city;
-		this.state = state;
-		this.country = country;
-		this.zipcode = zipcode;
-	}
 
 	public int getId() {
 		return Id;
@@ -92,10 +76,4 @@ public class Address {
 		this.zipcode = zipcode;
 	}
 	
-	@Override
-	public String toString() {
-		return "Address [Id=" + Id + ", address1=" + address1 + ", address2=" + address2 + ", city=" + city + ", state="
-				+ state + ", country=" + country + ", zipcode=" + zipcode + "]";
-	}
-
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.empstatus.model.Address;
 import com.empstatus.model.Employee;
+import com.empstatus.repository.AddressRepository;
 import com.empstatus.repository.EmployeeRepository;
 
 @Service
@@ -18,9 +19,15 @@ public class EmployeeService {
 
 	@Autowired
 	public EmployeeRepository employeeRepository;
+	
+	@Autowired
+	public AddressRepository addressRepository;
 
 	// Post Operation
 	public Employee createEmployee(Employee employee) {
+		
+		addressRepository.saveAll(employee.getAddress());
+		
 		return employeeRepository.save(employee);
 	}
 
