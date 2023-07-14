@@ -35,7 +35,7 @@ public class EmployeeService {
 	}
 
 	// Put Operation
-	public Employee updateEmployee(int id, Employee employee) {
+	public Employee updateEmployee(Long id, Employee employee) {
 		employee.setId(id);
 		return employeeRepository.save(employee);
 	}
@@ -46,7 +46,7 @@ public class EmployeeService {
 	}
 
 	// Patch Operation
-	public Employee patch(int id, Map<String, Object> tempEmployee) {
+	public Employee patch(Long id, Map<String, Object> tempEmployee) {
 
 		Optional<Employee> employee = employeeRepository.findById(id);
 		tempEmployee.forEach((key, value) -> {
@@ -58,7 +58,7 @@ public class EmployeeService {
 		return employeeRepository.save(employee.get());
 	}
 	
-	public Employee assignProfile(int id, Address address) {
+	public Employee assignProfile(Long id, Address address) {
 		Employee employee = employeeRepository.findById(id).get();
 		employee.addAddresses(address);
 		return employeeRepository.save(employee);
