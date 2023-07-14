@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.empstatus.model.Address;
 import com.empstatus.model.Employee;
+import com.empstatus.service.AddressService;
 import com.empstatus.service.EmployeeService;
 
 @RestController
@@ -24,14 +26,17 @@ public class EmployeeController {
 	@Autowired
 	public EmployeeService employeeService;
 	
+	@Autowired
+	AddressService addressService;
+	
 	@PostMapping("/employees")
 	ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
-		return new ResponseEntity<Employee>( employeeService.createEmployee(employee), HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<Employee>( employeeService.createEmployee(employee), HttpStatus.OK);
 	}
 	
 	@GetMapping("/employees")
 	ResponseEntity<List<Employee>> getEmployees() {
-		return new ResponseEntity<List<Employee>>(employeeService.findEmployees(), HttpStatus.ACCEPTED);
+		return new ResponseEntity<List<Employee>>(employeeService.findEmployees(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/employees/{id}")
@@ -41,14 +46,13 @@ public class EmployeeController {
 	
 	@PutMapping("/employees/{id}")
 	ResponseEntity<Employee> updateEmployee(@PathVariable int id, @RequestBody Employee employee) {
-		return new ResponseEntity<Employee>(employeeService.updateEmployee(id, employee), HttpStatus.FOUND);
+		return new ResponseEntity<Employee>(employeeService.updateEmployee(id, employee), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/employees/{id}")
 	ResponseEntity<Void> deleteEmployee(@PathVariable int id) {
 		employeeService.deleteEmployee(id);
-		return new ResponseEntity<Void>(HttpStatus.BANDWIDTH_LIMIT_EXCEEDED);
-		
+		return new ResponseEntity<Void>(HttpStatus.OK);	
 	}
 	
 	@PatchMapping("/employees/{id}")
@@ -56,5 +60,11 @@ public class EmployeeController {
 		return new ResponseEntity<Employee>(employeeService.patch(id, employee), HttpStatus.OK);
 	}
 	
+	@PutMapping("/employees/{id}/address/{address_id}")
+	ResponseEntity<Employee> assignDetail(@PathVariable int id, @PathVariable int address_id) {
+    	Address address = addressService.findAddress(address_id); 
+    	System.out.println(address);
+    	return new ResponseEntity<Employee>(employeeService.assignProfile(id, address), HttpStatus.OK);
+    }
 
 }

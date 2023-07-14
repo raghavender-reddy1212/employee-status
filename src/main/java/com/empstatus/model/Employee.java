@@ -15,6 +15,24 @@ public class Employee {
 	int age;
 	public String visaStatus;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "address_id", referencedColumnName = "Id")
+	private Address address;
+	
+	public Employee() {
+		
+	}
+	
+	public Employee(String firstName, int id, String lastName, int age, String visaStatus, Address address) {
+		super();
+		this.firstName = firstName;
+		Id = id;
+		this.lastName = lastName;
+		this.age = age;
+		this.visaStatus = visaStatus;
+		this.address = address;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -46,5 +64,19 @@ public class Employee {
 		this.visaStatus = visaStatus;
 	}
 	
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [firstName=" + firstName + ", Id=" + Id + ", lastName=" + lastName + ", age=" + age
+				+ ", visaStatus=" + visaStatus + ", address=" + address + "]";
+	}
+
 
 }

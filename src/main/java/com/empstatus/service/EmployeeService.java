@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.stereotype.Service;
 
+import com.empstatus.model.Address;
 import com.empstatus.model.Employee;
 import com.empstatus.repository.EmployeeRepository;
 
@@ -55,6 +56,12 @@ public class EmployeeService {
 		});
 
 		return employeeRepository.save(employee.get());
+	}
+	
+	public Employee assignProfile(int id, Address address) {
+		Employee employee = employeeRepository.findById(id).get();
+		employee.setAddress(address);
+		return employeeRepository.save(employee);
 	}
 
 }
