@@ -18,12 +18,14 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Table(name = "Employee")
 public class Employee {
-	@NotEmpty(message = "Last Name Cannot be Empty")
+	@NotEmpty(message = "First Name Cannot be Empty")
+	@Column(unique = true)
 	public String firstName;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long Id;
 	@NotEmpty(message = "Last Name Cannot be Empty")
+	@Column(unique = true)
 	public String lastName;
 	@Min(value = 18 , message = "Age cannot be Empty")
 	int age;
@@ -32,9 +34,11 @@ public class Employee {
 	@Past(message = "DOB Cannot be Present")
 	public Date dob;
 	@Email(message = "Please insert valid Email")
+	@Column(unique = true)
 	public String email;
 	@NotEmpty(message = "Phone Cannot be Empty")
 	@Size(max = 10)
+	@Column(unique = true)
 	public String phone;
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

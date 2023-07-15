@@ -1,6 +1,5 @@
 package com.empstatus.globalexception;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.springframework.http.HttpStatus;

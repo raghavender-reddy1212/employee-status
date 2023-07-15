@@ -4,17 +4,12 @@ import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
+import java.sql.*;
 import com.empstatus.utility.Constants;
 
 @ControllerAdvice
@@ -40,6 +35,14 @@ public class ErrorAdvice {
 		return new ResponseEntity<ErrorResponse>(errorResponse,HttpStatus.BAD_REQUEST);
 	    }
 	
+	@ExceptionHandler(SQLException.class)
+    public ResponseEntity<ErrorResponse> handleDuplicateInput(SQLException se) {
+        // Customize the error response message
+	ErrorResponse errorResponse=new ErrorResponse(constants.getStatusCode400(),HttpStatus.BAD_REQUEST,se.getMessage(),LocalDateTime.now());
+
+        // Return the customized error response with an appropriate HTTP status code
+	return new ResponseEntity<ErrorResponse>(errorResponse,HttpStatus.BAD_REQUEST);
+    }
 	
 	
 
