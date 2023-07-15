@@ -4,37 +4,36 @@ package com.empstatus.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
 
 @Entity
 @Table(name = "Employee")
 public class Employee {
-	
+	@NotEmpty(message = "Last Name Cannot be Empty")
 	public String firstName;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long Id;
-	@NotBlank(message = "Last Name Cannot be Empty")
+	@NotEmpty(message = "Last Name Cannot be Empty")
 	public String lastName;
-	@NotBlank(message = "Age Cannot be Empty")
-	@Min(value = 18)
+	@Min(value = 18 , message = "Age cannot be Empty")
 	int age;
-	@NotBlank(message = "Visa Status Cannot be Empty")
+	@NotEmpty(message = "Visa Status Cannot be Empty")
 	public String visaStatus;
-	@NotBlank(message = "DOB Cannot be Empty")
+	@Past(message = "DOB Cannot be Present")
 	public Date dob;
-	@NotBlank(message = "Email Cannot be Empty")
-	@Size(max =50)
+	@Email(message = "Please insert valid Email")
 	public String email;
-	@NotBlank(message = "Phone Cannot be Empty")
+	@NotEmpty(message = "Phone Cannot be Empty")
 	@Size(max = 10)
 	public String phone;
 	

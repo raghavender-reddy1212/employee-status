@@ -20,6 +20,8 @@ import com.empstatus.model.Employee;
 import com.empstatus.service.AddressService;
 import com.empstatus.service.EmployeeService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class EmployeeController {
 	
@@ -30,7 +32,7 @@ public class EmployeeController {
 	AddressService addressService;
 	
 	@PostMapping("/employees")
-	ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
+	ResponseEntity<Employee> createEmployee(@RequestBody @Valid Employee employee) {
 		return new ResponseEntity<Employee>( employeeService.createEmployee(employee), HttpStatus.OK);
 	}
 	
