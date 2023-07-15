@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.empstatus.model.Address;
 import com.empstatus.service.AddressService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class AddressController {
 	
@@ -25,34 +27,34 @@ public class AddressController {
 	public AddressService addressService;
 	
 	@PostMapping("/address")
-	ResponseEntity<Address> createAddress(@RequestBody Address address){
-		return new ResponseEntity<Address>(addressService.createAddress(address), HttpStatus.ACCEPTED);
+	ResponseEntity<Address> createAddress(@RequestBody @Valid Address address){
+		return new ResponseEntity<Address>(addressService.createAddress(address), HttpStatus.OK);
 	}
 	
 	@GetMapping("/address/{id}")
 	ResponseEntity<Address> getAddress(@PathVariable int id) {
-		return new ResponseEntity<Address>(addressService.findAddress(id), HttpStatus.BAD_GATEWAY);
+		return new ResponseEntity<Address>(addressService.findAddress(id), HttpStatus.OK);
 	}
 	
 	@GetMapping("/address")
 	ResponseEntity<List<Address>> getAddresses(){
-		return new ResponseEntity<List<Address>>(addressService.findAddresses(), HttpStatus.ALREADY_REPORTED);
+		return new ResponseEntity<List<Address>>(addressService.findAddresses(), HttpStatus.OK);
 	}
 	
 	@PutMapping("/address/{id}")
 	ResponseEntity<Address> updateAddress(@PathVariable int id, @RequestBody Address address) {
-		return new ResponseEntity<Address>(addressService.updateAddress(id, address), HttpStatus.CONFLICT);
+		return new ResponseEntity<Address>(addressService.updateAddress(id, address), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/address/{id}")
 	ResponseEntity<Void> deleteAddress(@PathVariable int id) {
 		addressService.deleteAddress(id);
-		return new ResponseEntity<Void>(HttpStatus.BANDWIDTH_LIMIT_EXCEEDED);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	@PatchMapping("/address/{id}")
 	ResponseEntity<Address> updateAddressData(@PathVariable int id, @RequestBody Map<String, Object> address) {
-		return new ResponseEntity<Address>(addressService.patch(id, address), HttpStatus.FOUND);
+		return new ResponseEntity<Address>(addressService.patch(id, address), HttpStatus.OK);
 	}
 
 }
