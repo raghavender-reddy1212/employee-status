@@ -13,6 +13,8 @@
 	<version>0.0.1</version>
 	<name>employee-status</name>
 	<description>Create Status Report on Weekly Basis</description>
+	<packaging>war</packaging>
+
 	<properties>
 		<java.version>17</java.version>
 	</properties>
