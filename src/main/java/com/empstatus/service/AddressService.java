@@ -10,13 +10,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
 import com.empstatus.model.Address;
+import com.empstatus.model.Vendor;
 import com.empstatus.repository.AddressRepository;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 
 @Service
 public class AddressService {
 	
 	@Autowired
 	public AddressRepository addressRepository;
+	
+	@PersistenceContext
+	EntityManager entityManager;
 	
 	// Post Operation
 	public Address createAddress(Address address) {
@@ -30,7 +38,9 @@ public class AddressService {
 	
 	// Get Operation - get all addresses
 	public List<Address> findAddresses() {
-		return addressRepository.findAll();
+		TypedQuery<Address> getAll = entityManager.createNamedQuery("getAllAddresses", Address.class);
+		return getAll.getResultList();
+		//return addressRepository.findAll();
 	}
 	
 	// Put Operation

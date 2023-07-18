@@ -17,6 +17,7 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "Employee")
+@NamedQuery(name = "getAllEmployees", query = "Select e from Employee e where isDelete = false")
 public class Employee {
 	@NotEmpty(message = "First Name Cannot be Empty")
 	@Column(unique = true)

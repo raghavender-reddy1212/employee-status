@@ -13,11 +13,13 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
 @Table(name = "Vendor")
+@NamedQuery(name = "getAllVendors", query = "Select v from Vendor v where isDelete = false")
 public class Vendor {
 	
 	@NotEmpty(message = "Vendor Name Cannot be Empty")

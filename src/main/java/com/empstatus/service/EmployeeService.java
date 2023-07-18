@@ -11,8 +11,13 @@ import org.springframework.stereotype.Service;
 
 import com.empstatus.model.Address;
 import com.empstatus.model.Employee;
+import com.empstatus.model.Vendor;
 import com.empstatus.repository.AddressRepository;
 import com.empstatus.repository.EmployeeRepository;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 
 @Service
 public class EmployeeService {
@@ -22,6 +27,9 @@ public class EmployeeService {
 	
 	@Autowired
 	public AddressRepository addressRepository;
+	
+	@PersistenceContext
+	EntityManager entityManager;
 
 	// Post Operation
 	public Employee createEmployee(Employee employee) {
@@ -32,7 +40,9 @@ public class EmployeeService {
 
 	// Get Operation - get all employees
 	public List<Employee> findEmployees() {
-		return employeeRepository.findAll();
+		TypedQuery<Employee> getAll = entityManager.createNamedQuery("getAllEmployees", Employee.class);
+		return getAll.getResultList();
+		//return employeeRepository.findAll();
 	}
 
 	// Get Operation - get employee with an id

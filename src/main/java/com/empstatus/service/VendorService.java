@@ -17,6 +17,10 @@ import com.empstatus.repository.ContactRepository;
 import com.empstatus.repository.EmployeeRepository;
 import com.empstatus.repository.VendorRepository;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
+
 @Service
 public class VendorService {
 	
@@ -29,6 +33,9 @@ public class VendorService {
 	@Autowired
 	public EmployeeRepository employeeRepository;
 	
+	@PersistenceContext
+	EntityManager entityManager;
+	
 	public Vendor createVendor(Vendor vendor) {
 //		contactRepository.saveAll(vendor.getContact());
 //		employeeRepository.saveAll(vendor.getEmployee());
@@ -40,7 +47,9 @@ public class VendorService {
 	}
 	
 	public List<Vendor> findVendors() {
-		return vendorRepository.findAll();
+		TypedQuery<Vendor> getAll = entityManager.createNamedQuery("getAllVendors", Vendor.class);
+		return getAll.getResultList();
+		//return vendorRepository.findAll();
 	}
 	
 	public Vendor updateVendor(int id, Vendor vendor) {

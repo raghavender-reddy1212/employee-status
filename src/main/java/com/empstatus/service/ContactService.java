@@ -12,11 +12,18 @@ import org.springframework.util.ReflectionUtils;
 import com.empstatus.model.Contact;
 import com.empstatus.repository.ContactRepository;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
+
 @Service
 public class ContactService {
 	
 	@Autowired
 	public ContactRepository contactRepository;
+	
+	@PersistenceContext
+	EntityManager entityManager;
 	
 	// Post Operation
 		public Contact createContact(Contact contact) {
@@ -30,7 +37,8 @@ public class ContactService {
 		
 		// Get Operation - get all contacts
 		public List<Contact> findContacts() {
-			return contactRepository.findAll();
+			TypedQuery<Contact> getAll = entityManager.createNamedQuery("getAllContacts", Contact.class);
+			return getAll.getResultList();
 		}
 		
 		// Put Operation
