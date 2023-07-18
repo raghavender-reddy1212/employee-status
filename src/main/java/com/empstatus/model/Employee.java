@@ -40,8 +40,17 @@ public class Employee {
 	@Size(max = 10)
 	@Column(unique = true)
 	public String phone;
+	public boolean isDelete = false;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	public boolean isDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(boolean isDelete) {
+		this.isDelete = isDelete;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "employee_id")
 	private List<Address> address = new ArrayList<>();
 
@@ -97,8 +106,6 @@ public class Employee {
 	public void setVisaStatus(String visaStatus) {
 		this.visaStatus = visaStatus;
 	}
-
-	
 
 	public void setDob(Date dob) {
 		this.dob = dob;

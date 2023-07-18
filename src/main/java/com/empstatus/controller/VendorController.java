@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.empstatus.model.Address;
 import com.empstatus.model.Contact;
 import com.empstatus.model.Employee;
 import com.empstatus.model.Vendor;
+import com.empstatus.service.AddressService;
 import com.empstatus.service.ContactService;
 import com.empstatus.service.EmployeeService;
 import com.empstatus.service.VendorService;
@@ -35,6 +37,9 @@ public class VendorController {
 	
 	@Autowired
 	public ContactService contactService;
+	
+	@Autowired
+	public AddressService addressService;
 	
 	@PostMapping("/vendors")
 	ResponseEntity<Vendor> createVendor(@RequestBody @Valid Vendor vendor) {
@@ -68,32 +73,36 @@ public class VendorController {
 	}
 	
 	
-	  @PutMapping("/vendors/{id}/employees/{employee_id}") ResponseEntity<Vendor>
-	  addEmployee(@PathVariable long id, @PathVariable long employee_id) { Employee
-	  employee = employeeService.findEmployee((int) id); return new
-	  ResponseEntity<Vendor>(vendorService.addEmployee((int) id, employee),
-	  HttpStatus.OK);
+	  @PutMapping("/vendors/{id}/employees/{employee_id}") 
+	  ResponseEntity<Vendor> addEmployee(@PathVariable long id, @PathVariable long employee_id) { 
+		  Employee employee = employeeService.findEmployee((int) employee_id); 
+		  return new ResponseEntity<Vendor>(vendorService.addEmployee((int) id, employee), HttpStatus.OK);
 	  
 	  }
 	  
 	  @PutMapping("/vendors/{id}/remove_employees/{employee_id}")
-	  ResponseEntity<Vendor> removeEmployee(@PathVariable long id, @PathVariable
-	  long employee_id) { Employee employee = employeeService.findEmployee((int)
-	  id); return new ResponseEntity<Vendor>(vendorService.removeEmployee((int) id,
-	  employee), HttpStatus.OK);
+	  ResponseEntity<Vendor> removeEmployee(@PathVariable long id, @PathVariable long employee_id) { 
+		  Employee employee = employeeService.findEmployee((int) employee_id); 
+		  return new ResponseEntity<Vendor>(vendorService.removeEmployee((int) id, employee), HttpStatus.OK);
 	  
 	  }
 	  
-	  @PutMapping("/vendors/{id}/contacts/{contact_id}") ResponseEntity<Vendor>
-	  addContact(@PathVariable long id, @PathVariable long contact_id) { Contact
-	  contact = contactService.findContact((int)id); return new
-	  ResponseEntity<Vendor>(vendorService.addContact((int) id, contact),
-	  HttpStatus.OK); }
+	  @PutMapping("/vendors/{id}/contacts/{contact_id}") 
+	  ResponseEntity<Vendor> addContact(@PathVariable long id, @PathVariable long contact_id) { 
+		  Contact contact = contactService.findContact((int) contact_id); 
+		  return new ResponseEntity<Vendor>(vendorService.addContact((int) id, contact), HttpStatus.OK); 
+		 }
 	  
 	  @PutMapping("/vendors/{id}/remove_contacts/{contact_id}")
-	  ResponseEntity<Vendor> removeContact(@PathVariable long id, @PathVariable
-	  long contact_id) { Contact contact = contactService.findContact((int)id);
+	  ResponseEntity<Vendor> removeContact(@PathVariable long id, @PathVariable long contact_id) { 
+		  Contact contact = contactService.findContact((int) contact_id);
 	  return new ResponseEntity<Vendor>(vendorService.removeContact((int) id,
 	  contact), HttpStatus.OK); }
+	  
+	  @PutMapping("/vendors/{id}/address/{address_id}")
+	  ResponseEntity<Vendor> addVendorAddress(@PathVariable int id, @PathVariable int address_id) {
+		  Address address = addressService.findAddress(address_id);
+		  return new ResponseEntity<Vendor>(vendorService.addAddress(id, address), HttpStatus.OK);
+	  }
 	 
 }

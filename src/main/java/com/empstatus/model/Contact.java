@@ -30,7 +30,16 @@ public class Contact {
 	@Size(max = 10)
 	@Column(unique = true)
 	public String phone;
+	public boolean isDelete = false;
 	
+	public boolean isDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(boolean isDelete) {
+		this.isDelete = isDelete;
+	}
+
 	public int getId() {
 		return Id;
 	}

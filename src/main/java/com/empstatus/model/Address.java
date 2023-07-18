@@ -27,10 +27,16 @@ public class Address {
 	public String country;
 	@NotNull(message="Zip Code Lenght should be Not Null")
 	public int zipcode;
-
+	public boolean isDelete = false;
 	
+	public boolean isDelete() {
+		return isDelete;
+	}
 
-	
+	public void setDelete(boolean isDelete) {
+		this.isDelete = isDelete;
+	}
+
 	public int getId() {
 		return Id;
 	}

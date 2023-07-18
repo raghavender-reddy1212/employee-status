@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
+import com.empstatus.model.Address;
 import com.empstatus.model.Contact;
 import com.empstatus.model.Employee;
 import com.empstatus.model.Vendor;
@@ -62,22 +63,33 @@ public class VendorService {
 	}
 	
 	
-	  public Vendor addEmployee(Integer id, Employee emp) { Vendor vendor =
-	  vendorRepository.findById(id).get(); vendor.addEmployee(emp); return
-	  vendorRepository.save(vendor);
-	  
+	  public Vendor addEmployee(Integer id, Employee emp) { 
+		  Vendor vendor = vendorRepository.findById(id).get(); 
+		  vendor.addEmployee(emp); 
+		  return vendorRepository.save(vendor);
 	  }
 	  
-	  public Vendor removeEmployee(int id, Employee emp) { Vendor vendor =
-	  vendorRepository.findById(id).get(); vendor.removeEmployee(emp); return
-	  vendorRepository.save(vendor); }
+	  public Vendor removeEmployee(int id, Employee emp) { 
+		  Vendor vendor = vendorRepository.findById(id).get(); 
+		  vendor.removeEmployee(emp); 
+		  return vendorRepository.save(vendor); 
+	  }
 	  
-	  public Vendor addContact(Integer id, Contact cont) { Vendor vendor =
-	  vendorRepository.findById(id).get(); vendor.addContact(cont); return
-	  vendorRepository.save(vendor); }
+	  public Vendor addContact(Integer id, Contact cont) { 
+		  Vendor vendor = vendorRepository.findById(id).get(); 
+		  vendor.addContact(cont); 
+		  return vendorRepository.save(vendor); 
+	  }
 	  
-	  public Vendor removeContact(int id, Contact cont) { Vendor vendor =
-	  vendorRepository.findById(id).get(); vendor.removeContact(cont); return
-	  vendorRepository.save(vendor); }
-	 
+	  public Vendor removeContact(int id, Contact cont) { 
+		  Vendor vendor = vendorRepository.findById(id).get(); 
+		  vendor.removeContact(cont); 
+		  return vendorRepository.save(vendor); 
+	  }
+	  
+	  public Vendor addAddress(int id, Address address) {
+			Vendor vendor = vendorRepository.findById(id).get();
+			vendor.setAddress(address);
+			return vendorRepository.save(vendor);
+		}
 }
