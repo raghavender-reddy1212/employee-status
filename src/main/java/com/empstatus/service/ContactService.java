@@ -41,7 +41,10 @@ public class ContactService {
 		
 		// Delete Operation
 		public void deleteContact(int id) {
-			contactRepository.delete(contactRepository.findById(id).get());
+			Contact cont = contactRepository.findById(id).get();
+			cont.setDelete(true);
+			contactRepository.save(cont);
+			//contactRepository.delete(contactRepository.findById(id).get());
 		}
 
 		// Patch Operation

@@ -41,7 +41,10 @@ public class AddressService {
 	
 	// Delete Operation
 	public void deleteAddress(int id) {
-		addressRepository.delete(addressRepository.findById(id).get());
+		Address addr = addressRepository.findById(id).get();
+		addr.setDelete(true);
+		addressRepository.save(addr);
+		//addressRepository.delete(addressRepository.findById(id).get());
 	}
 
 	// Patch Operation

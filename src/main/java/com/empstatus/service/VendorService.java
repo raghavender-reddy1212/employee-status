@@ -49,7 +49,10 @@ public class VendorService {
 	}
 	
 	public void deleteVendor(int id) {
-		vendorRepository.delete(vendorRepository.findById(id).get());
+		Vendor vend = vendorRepository.findById(id).get();
+		vend.setDelete(true);
+		vendorRepository.save(vend);
+		//vendorRepository.delete(vendorRepository.findById(id).get());
 	}
 	
 	public Vendor patch(long id, Map<String, Object> tempVendor) {

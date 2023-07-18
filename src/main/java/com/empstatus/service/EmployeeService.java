@@ -48,7 +48,10 @@ public class EmployeeService {
 
 	// Delete Operation
 	public void deleteEmployee(int id) {
-		employeeRepository.delete(employeeRepository.findById(id).get());
+		Employee emp = employeeRepository.findById(id).get();
+		emp.setDelete(true);
+		employeeRepository.save(emp);
+		//employeeRepository.delete(employeeRepository.findById(id).get());
 	}
 
 	// Patch Operation
