@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.empstatus.model.Address;
 import com.empstatus.model.Employee;
-import com.empstatus.model.Vendor;
 import com.empstatus.repository.AddressRepository;
 import com.empstatus.repository.EmployeeRepository;
 
@@ -66,7 +65,6 @@ public class EmployeeService {
 
 	// Patch Operation
 	public Employee patch(Long id, Map<String, Object> tempEmployee) {
-
 		Optional<Employee> employee = employeeRepository.findById(id);
 		tempEmployee.forEach((key, value) -> {
 			Field field = ReflectionUtils.findField(Employee.class, key);
